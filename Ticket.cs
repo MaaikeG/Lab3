@@ -10,28 +10,22 @@ namespace Lab3
     {
         private string From;
         private string To;
-        internal readonly float price;
         private Tuple<DateTime, DateTime> geldigheid;
-        private Class.IClass travelClass;
+        private Class.IClass _class;
         private IDiscount discount;
         private float ICEtoeslag;
         private bool isReturn;
 
         public Guid Id { get; internal set; }
+        public float price { get; private set; }
 
         public void calculateTicketPrice()
         {
             // Get number of tariefeenheden
             int tariefeenheden = Tariefeenheden.getTariefeenheden(From, To);
 
-            // Compute the column in the table based on choices
-            int tableColumn = travelClass.GetColumnIndex();
+            price = PricingCalculator.CalculatePrice(this.discount, this._class, tariefeenheden);
 
-            // Then, on the discount
-            tableColumn += discount.GetColumnIndexModifier();
-
-            // Get price
-            float price = PricingTable.getPrice(tariefeenheden, tableColumn);
             if (this.isReturn)
             {
                 price *= 2;
@@ -43,24 +37,8 @@ namespace Lab3
         {
             this.From = info.From;
             this.To = info.To;
-
-            if (info.Class == UIClass.FirstClass)
-            {
-                this.travelClass = new Class.FirstClass();
-            }
-            else this.travelClass = new Class.SecondClass();
-
-            switch (info.Discount) { 
-                case UIDiscount.FortyDiscount:
-                    this.discount = new FortyDiscount();
-                    break;
-                case UIDiscount.TwentyDiscount:
-                    this.discount = new TwentyDiscount();
-                    break;
-                default:
-                    this.discount = new NoDiscount();
-                    break;
-            }
+            this._class = TicketPropertyFactory.GetCLass(info.Class);
+            this.discount = TicketPropertyFactory.GetDiscount(info.Discount);
             this.isReturn = info.Way == UIWay.Return;
         }
     }
