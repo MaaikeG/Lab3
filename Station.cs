@@ -7,5 +7,9 @@ namespace Lab3
 {
     class Station
     {
+        public Guid id;
+        public string startStation;
+        public string eindStation; 
+             
     }
 }
