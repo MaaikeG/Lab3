@@ -7,6 +7,8 @@ namespace Lab3
 {
     class Ticket
     {
+        internal readonly float price;
+
         public void calculateTicketPrice()
         {
             throw new NotImplementedException();
