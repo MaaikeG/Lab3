@@ -26,5 +26,11 @@ namespace Lab3
                 this.totalPrice += ticket.price;
             }
         }
+        
+        public void DoPayment(UIPayment paymentType)
+        {
+            IPayment payment = PaymentFactory.CreatePayment(paymentType);
+            payment.HandlePayment(this.totalPrice);
+        }
     }
 }

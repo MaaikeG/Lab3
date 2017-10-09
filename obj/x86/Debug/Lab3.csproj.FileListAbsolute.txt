@@ -1,0 +1,6 @@
+D:\Users\Maaike\Documents\Informatica\Jaar 2\Modelleren en Systeemontwikkeling\Lab3\obj\x86\Debug\Lab3.csprojResolveAssemblyReference.cache
+D:\Users\Maaike\Documents\Informatica\Jaar 2\Modelleren en Systeemontwikkeling\Lab3\obj\x86\Debug\Lab3.csproj.CoreCompileInputs.cache
+D:\Users\Maaike\Documents\Informatica\Jaar 2\Modelleren en Systeemontwikkeling\Lab3\bin\Debug\Lab3.exe
+D:\Users\Maaike\Documents\Informatica\Jaar 2\Modelleren en Systeemontwikkeling\Lab3\bin\Debug\Lab3.pdb
+D:\Users\Maaike\Documents\Informatica\Jaar 2\Modelleren en Systeemontwikkeling\Lab3\obj\x86\Debug\Lab3.exe
+D:\Users\Maaike\Documents\Informatica\Jaar 2\Modelleren en Systeemontwikkeling\Lab3\obj\x86\Debug\Lab3.pdb
