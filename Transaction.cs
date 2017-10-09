@@ -22,6 +22,7 @@ namespace Lab3
 
         public void CalculatePrice()
         {
+            this.totalPrice = 0;
             foreach (var ticket in tickets)
             {
                 ticket.calculateTicketPrice();
@@ -29,17 +30,22 @@ namespace Lab3
             }
         }
         
-        public void DoPayment(UIPayment paymentType)
+        public void Complete(UIPayment paymentType)
         {
-
             IPayment payment = PaymentFactory.CreatePayment(paymentType);
             // Add 50 cent if paying with credit card
-            if (info.Payment == UIPayment.CreditCard)
+            if (paymentType == UIPayment.CreditCard)
             {
-                price += 0.50f;
+                this.totalPrice += 0.50f;
             }
 
             payment.HandlePayment(this.totalPrice);
+        }
+
+        internal void UpdateTicket(Guid ticketID, UIInfo info)
+        {
+            Ticket ticket = this.tickets.Find(x => x.Id == ticketID);
+            ticket.UpdateInfo(info);
         }
     }
 }

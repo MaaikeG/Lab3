@@ -33,40 +33,8 @@ namespace Lab3
 
 		private void handlePayment(UIInfo info)
 		{
-            transaction.DoPayment(info.Payment);
-			// *************************************
-			// This is the code you need to refactor
-			// *************************************
-
-			// Get number of tariefeenheden
-			int tariefeenheden = Tariefeenheden.getTariefeenheden (info.From, info.To);
-
-			// Compute the column in the table based on choices
-			int tableColumn;
-			// First based on class
-			switch (info.Class) {
-			case UIClass.FirstClass:
-				tableColumn = 3;
-				break;
-			default:
-				tableColumn = 0;
-				break;
-			}
-			// Then, on the discount
-			switch (info.Discount) {
-			case UIDiscount.TwentyDiscount:
-				tableColumn += 1;
-				break;
-			case UIDiscount.FortyDiscount:
-				tableColumn += 2;
-				break;
-			}
-
-			// Get price
-			float price = PricingTable.getPrice (tariefeenheden, tableColumn);
-			if (info.Way == UIWay.Return) {
-				price *= 2;
-			}
+            transaction.UpdateTicket(ticketID, info);
+            transaction.Complete(info.Payment);
 		}
 
 #region Set-up -- don't look at it
@@ -220,11 +188,26 @@ namespace Lab3
 			else
 				dis = UIDiscount.FortyDiscount;
 
+            UIPayment pmnt;
+            switch (payment.SelectedItem)
+            {
+                case "Credit card":
+                    pmnt = UIPayment.CreditCard;
+                    break;
+                case "Debit card":
+                    pmnt = UIPayment.DebitCard;
+                    break;
+                case "Cash":
+                    pmnt = UIPayment.Cash;
+                    break;
+                default:
+                    throw new Exception("UIPayment type unknown.");
+            }
 			
 
 			return new UIInfo ((string)fromBox.SelectedItem,
 				(string)toBox.SelectedItem,
-				cls, way, dis, pment);
+				cls, way, dis, pmnt);
 		}
 #endregion
 	}
