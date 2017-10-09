@@ -17,14 +17,23 @@ namespace Lab3
 		RadioButton fortyDiscount;
 		ComboBox payment;
 		Button pay;
+        private Transaction transaction;
+        // we keep track of the current ticket ID. This is necessary because
+        // the backend supports multiple tickets within a transaction, so it needs the ticketID
+        // to know which ticket we want to edit. The frontend doesn't support multiple tickets.
+        private Guid ticketID;
 
-		public UI ()
+        public UI ()
 		{
 			initializeControls ();
+            this.transaction = new Transaction();
+            ticketID = transaction.AddTicket();
 		}
+
 
 		private void handlePayment(UIInfo info)
 		{
+            transaction.DoPayment(info.Payment);
 			// *************************************
 			// This is the code you need to refactor
 			// *************************************
@@ -57,32 +66,6 @@ namespace Lab3
 			float price = PricingTable.getPrice (tariefeenheden, tableColumn);
 			if (info.Way == UIWay.Return) {
 				price *= 2;
-			}
-			// Add 50 cent if paying with credit card
-			if (info.Payment == UIPayment.CreditCard) {
-				price += 0.50f;
-			}
-
-			// Pay
-			switch (info.Payment) {
-			case UIPayment.CreditCard:
-				CreditCard c = new CreditCard ();
-				c.Connect ();
-				int ccid = c.BeginTransaction (price);
-				c.EndTransaction (ccid);
-				break;
-			case UIPayment.DebitCard:
-				DebitCard d = new DebitCard ();
-				d.Connect ();
-				int dcid = d.BeginTransaction (price);
-				d.EndTransaction (dcid);
-				break;
-			case UIPayment.Cash:
-				IKEAMyntAtare2000 coin = new IKEAMyntAtare2000 ();
-				coin.starta ();
-				coin.betala ((int) Math.Round(price * 100));
-				coin.stoppa ();
-				break;
 			}
 		}
 
@@ -237,18 +220,7 @@ namespace Lab3
 			else
 				dis = UIDiscount.FortyDiscount;
 
-			UIPayment pment;
-			switch ((string)payment.SelectedItem) {
-			case "Credit card":
-				pment = UIPayment.CreditCard;
-				break;
-			case "Debit card":
-				pment = UIPayment.DebitCard;
-				break;
-			default:
-				pment = UIPayment.Cash;
-				break;
-			}
+			
 
 			return new UIInfo ((string)fromBox.SelectedItem,
 				(string)toBox.SelectedItem,

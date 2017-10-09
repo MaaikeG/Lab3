@@ -11,7 +11,9 @@ namespace Lab3
         private Tuple<DateTime, DateTime> geldigheid;
         private short klasse;
         private float ICEtoeslag;
- 
+
+        public Guid id { get; private set; }
+
         public void calculateTicketPrice()
         {
             throw new NotImplementedException();

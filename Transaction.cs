@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 using System.Collections.Generic;
 
 namespace Lab3
@@ -8,9 +8,11 @@ namespace Lab3
         List<Ticket> tickets = new List<Ticket>();
         private float totalPrice;
 
-        public void AddTicket()
+        public Guid AddTicket()
         {
-            this.tickets.Add(new Ticket());
+            var ticket = new Ticket();
+            this.tickets.Add(ticket);
+            return ticket.Id;
         }
 
         public void RemoveTicket(Ticket ticket)
@@ -29,7 +31,14 @@ namespace Lab3
         
         public void DoPayment(UIPayment paymentType)
         {
+
             IPayment payment = PaymentFactory.CreatePayment(paymentType);
+            // Add 50 cent if paying with credit card
+            if (info.Payment == UIPayment.CreditCard)
+            {
+                price += 0.50f;
+            }
+
             payment.HandlePayment(this.totalPrice);
         }
     }
