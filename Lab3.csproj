@@ -46,7 +46,7 @@
     <Compile Include="Payment\CardPayment.cs" />
     <Compile Include="Class\IClass.cs" />
     <Compile Include="Payment\CoinPayment.cs" />
-    <Compile Include="Payment\Payment.cs" />
+    <Compile Include="Payment\IPayment.cs" />
     <Compile Include="Payment\PaymentFactory.cs" />
     <Compile Include="PricingCalculator.cs" />
     <Compile Include="Program.cs" />
@@ -60,7 +60,7 @@
     <Compile Include="Tariefeenheden.cs" />
     <Compile Include="UIInfo.cs" />
     <Compile Include="PricingTable.cs" />
-    <Compile Include="Card.cs" />
+    <Compile Include="Payment\ICard.cs" />
     <Compile Include="Payment\IKEAMyntAtare2000.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
