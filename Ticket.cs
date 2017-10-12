@@ -6,40 +6,41 @@ using System.Text;
 
 namespace Lab3
 {
-    class Ticket
+    public class Ticket
     {
-        private string From;
-        private string To;
-        private Tuple<DateTime, DateTime> geldigheid;
-        private Class.IClass _class;
-        private IDiscount discount;
-        private float ICEtoeslag;
-        private bool isReturn;
-
+        public string From { get; private set; }
+        public string To { get; private set; }
+        public Tuple<DateTime, DateTime> Geldigheid { get; private set; }
+        public Class.IClass Class { get; private set; }
+        public IDiscount Discount { get; private set; }
+        public float ICEtoeslag { get; private set; }
+        public bool IsReturn { get; private set; }
         public Guid Id { get; internal set; }
-        public float price { get; private set; }
+        public float Price { get; private set; }
 
-        public void calculateTicketPrice()
+        public void CalculateTicketPrice()
         {
             // Get number of tariefeenheden
-            int tariefeenheden = Tariefeenheden.getTariefeenheden(From, To);
+            int tariefeenheden = Tariefeenheden.GetTariefeenheden(From, To);
 
-            price = PricingCalculator.CalculatePrice(this.discount, this._class, tariefeenheden);
+            Price = PricingCalculator.CalculatePrice(this.Discount, this.Class, tariefeenheden);
 
-            if (this.isReturn)
+            if (this.IsReturn)
             {
-                price *= 2;
+                Price *= 2;
             }
-            price += ICEtoeslag;
+            Price += ICEtoeslag;
         }
 
         internal void UpdateInfo(UIInfo info)
         {
             this.From = info.From;
             this.To = info.To;
-            this._class = TicketPropertyFactory.GetCLass(info.Class);
-            this.discount = TicketPropertyFactory.GetDiscount(info.Discount);
-            this.isReturn = info.Way == UIWay.Return;
+            this.Class = TicketPropertyFactory.GetCLass(info.Class);
+            this.Discount = TicketPropertyFactory.GetDiscount(info.Discount);
+            this.IsReturn = info.Way == UIWay.Return;
+            this.Geldigheid = new Tuple<DateTime, DateTime>(DateTime.Today, DateTime.Today);
+            CalculateTicketPrice();
         }
     }
 }

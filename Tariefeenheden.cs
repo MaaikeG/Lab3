@@ -4,7 +4,7 @@ namespace Lab3
 {
 	public static class Tariefeenheden
 	{
-		public static String[] getStations()
+		public static String[] GetStations()
 		{
 			return new String[] {
 				"Utrecht Centraal",
@@ -16,7 +16,7 @@ namespace Lab3
 			};
 		}
 
-		public static int getTariefeenheden(String from, String to) 
+		public static int GetTariefeenheden(String from, String to) 
 		{
 			switch (from) {
 			case "Utrecht Centraal":
@@ -49,7 +49,7 @@ namespace Lab3
 				case "Weesp":
 					return 57;
 				default:
-					return getTariefeenheden (to, from);
+					return GetTariefeenheden (to, from);
 				}
 			case "Geldermalsen":
 				switch (to) {
@@ -62,7 +62,7 @@ namespace Lab3
 				case "Weesp":
 					return 59;
 				default:
-					return getTariefeenheden (to, from);
+					return GetTariefeenheden (to, from);
 				}
 			case "Hilversum":
 				switch (to) {
@@ -73,7 +73,7 @@ namespace Lab3
 				case "Weesp":
 					return 15;
 				default:
-					return getTariefeenheden (to, from);
+					return GetTariefeenheden (to, from);
 				}
 			case "Duivendrecht":
 				switch (to) {
@@ -82,14 +82,14 @@ namespace Lab3
 				case "Weesp":
 					return 3;
 				default:
-					return getTariefeenheden (to, from);
+					return GetTariefeenheden (to, from);
 				}
 			case "Weesp":
 				switch (to) {
 				case "Weesp":
 					return 0;
 				default:
-					return getTariefeenheden (to, from);
+					return GetTariefeenheden (to, from);
 				}
 			default:
 				throw new Exception ("Unknown stations");

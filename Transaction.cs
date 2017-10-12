@@ -20,32 +20,52 @@ namespace Lab3
             this.tickets.Remove(ticket);
         }
 
-        public void CalculatePrice()
+        public void CalculatePrice(UIPayment paymentType)
         {
             this.totalPrice = 0;
             foreach (var ticket in tickets)
             {
-                ticket.calculateTicketPrice();
-                this.totalPrice += ticket.price;
+                ticket.CalculateTicketPrice();
+                this.totalPrice += ticket.Price;
             }
-        }
-        
-        public void Complete(UIPayment paymentType)
-        {
-            IPayment payment = PaymentFactory.CreatePayment(paymentType);
             // Add 50 cent if paying with credit card
             if (paymentType == UIPayment.CreditCard)
             {
                 this.totalPrice += 0.50f;
             }
-
+        }
+        
+        public void Complete(UIPayment paymentType)
+        {
+            IPayment payment = CreatePayment(paymentType);
             payment.HandlePayment(this.totalPrice);
+
+            foreach (var ticket in tickets)
+            {
+                Printer.PrintTicket(ticket);
+            }
         }
 
         internal void UpdateTicket(Guid ticketID, UIInfo info)
         {
             Ticket ticket = this.tickets.Find(x => x.Id == ticketID);
             ticket.UpdateInfo(info);
+            this.CalculatePrice(info.Payment);
+        }
+
+        private IPayment CreatePayment(UIPayment paymentType)
+        {
+            switch (paymentType)
+            {
+                case UIPayment.Cash:
+                    return new CoinPayment();
+                case UIPayment.CreditCard:
+                    return new CardPayment(new CreditCard());
+                case UIPayment.DebitCard:
+                    return new CardPayment(new DebitCard());
+                default:
+                    throw new ArgumentException();
+            }
         }
     }
 }

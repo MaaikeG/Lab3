@@ -69,7 +69,7 @@ namespace Lab3
 			fromLabel.Dock = DockStyle.Fill;
 			fromBox = new ComboBox ();
 			fromBox.DropDownStyle = ComboBoxStyle.DropDownList;
-			fromBox.Items.AddRange (Tariefeenheden.getStations ());
+			fromBox.Items.AddRange (Tariefeenheden.GetStations ());
 			fromBox.SelectedIndex = 0;
 			grid.Controls.Add (fromBox, 1, 0);
 			grid.SetColumnSpan (fromBox, 2);
@@ -81,7 +81,7 @@ namespace Lab3
 			toLabel.Dock = DockStyle.Fill;
 			toBox = new ComboBox ();
 			toBox.DropDownStyle = ComboBoxStyle.DropDownList;
-			toBox.Items.AddRange (Tariefeenheden.getStations ());
+			toBox.Items.AddRange (Tariefeenheden.GetStations ());
 			toBox.SelectedIndex = 0;
 			grid.Controls.Add (toBox, 4, 0);
 			grid.SetColumnSpan (toBox, 2);

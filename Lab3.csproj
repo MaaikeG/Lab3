@@ -47,8 +47,8 @@
     <Compile Include="Class\IClass.cs" />
     <Compile Include="Payment\CoinPayment.cs" />
     <Compile Include="Payment\IPayment.cs" />
-    <Compile Include="Payment\PaymentFactory.cs" />
     <Compile Include="PricingCalculator.cs" />
+    <Compile Include="Printer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ticket.cs" />
