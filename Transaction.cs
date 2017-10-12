@@ -5,7 +5,7 @@ namespace Lab3
 {
     class Transaction
     {
-        List<Ticket> tickets = new List<Ticket>();
+        public List<Ticket> tickets { get; set; } = new List<Ticket>();
         private float totalPrice;
 
         public Guid AddTicket()
@@ -39,11 +39,6 @@ namespace Lab3
         {
             IPayment payment = CreatePayment(paymentType);
             payment.HandlePayment(this.totalPrice);
-
-            foreach (var ticket in tickets)
-            {
-                Printer.PrintTicket(ticket);
-            }
         }
 
         internal void UpdateTicket(Guid ticketID, UIInfo info)

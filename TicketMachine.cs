@@ -13,12 +13,21 @@ namespace Lab3
         // to know which ticket we want to edit. The frontend doesn't support multiple tickets.
         private Guid ticketID;
 
-        internal void DoTransaction(UIInfo info)
+        public void DoTransaction(UIInfo info)
         {
             StartTransaction();
             transaction.UpdateTicket(ticketID, info);
             transaction.Complete(info.Payment);
+            PrintTickets();
             Reset();
+        }
+
+        private void PrintTickets()
+        {
+            foreach (var ticket in transaction.tickets)
+            {
+                Printer.PrintTicket(ticket);
+            }
         }
 
         private void StartTransaction()
