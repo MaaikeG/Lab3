@@ -29,7 +29,7 @@ namespace Lab3
 
 		private void handlePayment(UIInfo info)
 		{
-            TicketMachine.HandlePayment(info);
+            TicketMachine.DoTransaction(info);
 		}
 
 #region Set-up -- don't look at it
