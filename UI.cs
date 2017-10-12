@@ -17,24 +17,19 @@ namespace Lab3
 		RadioButton fortyDiscount;
 		ComboBox payment;
 		Button pay;
-        private Transaction transaction;
-        // we keep track of the current ticket ID. This is necessary because
-        // the backend supports multiple tickets within a transaction, so it needs the ticketID
-        // to know which ticket we want to edit. The frontend doesn't support multiple tickets.
-        private Guid ticketID;
+
+        internal TicketMachine TicketMachine { get; }
 
         public UI ()
 		{
 			initializeControls ();
-            this.transaction = new Transaction();
-            ticketID = transaction.AddTicket();
+            this.TicketMachine = new TicketMachine();
 		}
 
 
 		private void handlePayment(UIInfo info)
 		{
-            transaction.UpdateTicket(ticketID, info);
-            transaction.Complete(info.Payment);
+            TicketMachine.HandlePayment(info);
 		}
 
 #region Set-up -- don't look at it

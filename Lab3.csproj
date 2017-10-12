@@ -52,6 +52,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ticket.cs" />
+    <Compile Include="TicketMachine.cs" />
     <Compile Include="TicketPropertyFactory.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="UI.cs">
